@@ -1,0 +1,18 @@
+syntax = "proto3";
+package cloud;
+
+message Message {
+  string body = 1;
+  string error = 2;
+}
+message File{
+  bytes file = 1;
+  string filename = 2;
+}
+
+service Cloud {
+  rpc SayHello(Message) returns (Message) {} //a simple test if the server is reachable -> return message should allays be "beep boop i am a server"
+  rpc Upload(File) returns (Message) {}
+  rpc Download(Message) returns (File){}
+  rpc GetFiles(Message) returns (Message) {} //sends the client name, the return message is in json format
+}
